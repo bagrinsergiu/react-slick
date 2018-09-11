@@ -2162,7 +2162,8 @@
           var listWidth = Math.ceil(
             getWidth(_reactDom2.default.findDOMNode(spec.listRef))
           );
-          var trackWidth = Math.ceil(
+          // let trackWidth = Math.ceil(getWidth(ReactDOM.findDOMNode(spec.trackRef)));
+          var trackWidth = Math.floor(
             getWidth(_reactDom2.default.findDOMNode(spec.trackRef))
           );
           var slideWidth = void 0;
@@ -2175,7 +2176,9 @@
             ) {
               centerPaddingAdj *= listWidth / 100;
             }
-            slideWidth = Math.ceil(
+            // Uses floor and down width
+            // slideWidth = Math.ceil((listWidth - centerPaddingAdj) / spec.slidesToShow);
+            slideWidth = Math.floor(
               (listWidth - centerPaddingAdj) / spec.slidesToShow
             );
           } else {
