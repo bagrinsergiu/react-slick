@@ -3067,19 +3067,9 @@
             }
           } else {
             if (spec.infinite) {
-              // leftover are the visible slides to the left of the current slide when infinite but at the very end
-              var leftover = Math.max(
-                spec.currentSlide + spec.slidesToScroll - spec.slideCount,
-                0
-              );
               slickActive =
-                (index >= spec.currentSlide - leftover &&
-                  index < spec.currentSlide + spec.slidesToShow) ||
-                index <
-                  spec.currentSlide -
-                    leftover +
-                    spec.slidesToShow -
-                    spec.slideCount;
+                spec.currentSlide <= index &&
+                index < spec.currentSlide + spec.slidesToShow;
             } else {
               slickActive =
                 index >=
