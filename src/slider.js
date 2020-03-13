@@ -106,9 +106,7 @@ export default class Slider extends React.Component {
         process.env.NODE_ENV !== "production"
       ) {
         console.warn(
-          `slidesToScroll should be equal to 1 in centerMode, you are using ${
-            settings.slidesToScroll
-          }`
+          `slidesToScroll should be equal to 1 in centerMode, you are using ${settings.slidesToScroll}`
         );
       }
       settings.slidesToScroll = 1;
@@ -117,9 +115,7 @@ export default class Slider extends React.Component {
     if (settings.fade) {
       if (settings.slidesToShow > 1 && process.env.NODE_ENV !== "production") {
         console.warn(
-          `slidesToShow should be equal to 1 when fade is true, you're using ${
-            settings.slidesToShow
-          }`
+          `slidesToShow should be equal to 1 when fade is true, you're using ${settings.slidesToShow}`
         );
       }
       if (
@@ -127,9 +123,7 @@ export default class Slider extends React.Component {
         process.env.NODE_ENV !== "production"
       ) {
         console.warn(
-          `slidesToScroll should be equal to 1 when fade is true, you're using ${
-            settings.slidesToScroll
-          }`
+          `slidesToScroll should be equal to 1 when fade is true, you're using ${settings.slidesToScroll}`
         );
       }
       settings.slidesToShow = 1;
@@ -208,7 +202,11 @@ export default class Slider extends React.Component {
       settings.unslick = true;
     }
     return (
-      <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
+      <InnerSlider
+        ref={this.innerSliderRefHandler}
+        {...settings}
+        alwaysShowDots={this.props.alwaysShowDots}
+      >
         {newChildren}
       </InnerSlider>
     );

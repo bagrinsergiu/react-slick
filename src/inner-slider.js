@@ -264,9 +264,7 @@ export class InnerSlider extends React.Component {
       };
       if (this.props.centerMode) {
         let currentWidth = `${childrenWidths[this.state.currentSlide]}px`;
-        trackStyle.left = `calc(${
-          trackStyle.left
-        } + (100% - ${currentWidth}) / 2 ) `;
+        trackStyle.left = `calc(${trackStyle.left} + (100% - ${currentWidth}) / 2 ) `;
       }
       this.setState({
         trackStyle
@@ -276,15 +274,15 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
+      (-slideWidth *
+        (getPreClones(spec) + this.state.currentSlide) *
+        trackWidth) /
       100;
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
       width: trackWidth + "%",
@@ -625,8 +623,9 @@ export class InnerSlider extends React.Component {
 
     var dots;
     if (
-      this.props.dots === true &&
-      this.state.slideCount >= this.props.slidesToShow
+      (this.props.dots === true &&
+        this.state.slideCount >= this.props.slidesToShow) ||
+      this.props.alwaysShowDots
     ) {
       let dotProps = extractObject(spec, [
         "dotsClass",
@@ -727,7 +726,7 @@ export class InnerSlider extends React.Component {
           </Track>
         </div>
         {!this.props.unslick ? nextArrow : ""}
-        {!this.props.unslick ? dots : ""}
+        {this.props.alwaysShowDots || !this.props.unslick ? dots : ""}
       </div>
     );
   };
